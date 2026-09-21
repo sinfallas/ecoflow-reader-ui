@@ -42,4 +42,37 @@ describe('Panel de Telemetría (App.vue)', () => {
     expect(wrapper.text()).toContain('R331ZABASH2L2360')
     expect(wrapper.text()).toContain('98%')
   })
+
+  it('actualiza los datos automáticamente cada 10 segundos (Integración)', async () => {
+    // 1. Tomamos el control del reloj del sistema
+    vi.useFakeTimers()
+    
+    const mockData = { devices: { 'R331ZABASH2L2360': { battery: { level: 98 } } } }
+    
+    // Limpiamos el registro de llamadas de pruebas anteriores
+    vi.mocked(api.getDevices).mockClear()
+    vi.mocked(api.getDevices).mockResolvedValue(mockData as any)
+
+    // 2. Montamos la aplicación
+    const wrapper = mount(App)
+    
+    // Debería llamarse la primera vez inmediatamente (por el onMounted)
+    expect(api.getDevices).toHaveBeenCalledTimes(1)
+
+    // 3. Avanzamos el reloj artificialmente 10 segundos (10000 ms)
+    await vi.advanceTimersByTimeAsync(10000)
+    
+    // Verificamos que el setInterval haya disparado la segunda petición
+    expect(api.getDevices).toHaveBeenCalledTimes(2)
+
+    // Avanzamos otros 10 segundos más
+    await vi.advanceTimersByTimeAsync(10000)
+    
+    // Verificamos la tercera petición
+    expect(api.getDevices).toHaveBeenCalledTimes(3)
+
+    // 4. Limpieza: desmontamos el componente para apagar el setInterval y devolvemos el reloj a la normalidad
+    wrapper.unmount()
+    vi.useRealTimers()
+  })
 })
