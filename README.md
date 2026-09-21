@@ -1,24 +1,58 @@
 # EcoFlow Reader UI
 
-Panel de control web reactivo para monitorear la telemetría, el consumo y el estado de batería de múltiples equipos EcoFlow. 
+Panel de telemetría web moderno y responsivo para monitorear estaciones de energía EcoFlow en tiempo real. Este frontend se comunica con la API para visualizar el estado de la batería, flujos de entrada (AC/Solar) y consumos de salida.
 
-Este frontend está desarrollado con **Vue 3** y **Vite**, y está diseñado para consumir exclusivamente los datos proporcionados por `ecoflow-reader-api`.
+Construido con **Vue 3 (Composition API)**, **TypeScript**, **Tailwind CSS v4** y empaquetado con **Vite**.
 
-## Entorno de Desarrollo (Docker)
+## Arquitectura
 
-No es necesario instalar Node.js ni NPM en el sistema anfitrión. Todo el flujo de trabajo está encapsulado.
+El proyecto utiliza Docker Compose con dos entornos aislados:
+1. **Desarrollo (`ui-dev`)**: Utiliza un contenedor de Node para ofrecer *Hot-Module Replacement* (HMR) a través del puerto 5173.
+2. **Producción (`ui-prod`)**: Utiliza un *Multi-stage build* que compila los archivos estáticos y los sirve mediante un servidor **Nginx** ultraligero en el puerto 80.
 
-1. **Prepara las variables de entorno:**
+## Requisitos Previos
+
+* Docker y Docker Compose instalados.
+* La API backend de EcoFlow Reader corriendo y con los orígenes CORS configurados adecuadamente.
+
+## Configuración Inicial
+
+1. Clona este repositorio.
+2. Copia la plantilla de variables de entorno:
    ```bash
    cp .env.example .env
    ```
-2. **Levanta el servidor de desarrollo:**
-   ```bash
-   docker compose up -d
+3. Edita el archivo `.env` y asegúrate de que la URL apunte a tu API local:
+   ```env
+   VITE_API_URL=http://localhost:8000/api/v1
    ```
-3. **Accede al panel:**
-   Abre `http://localhost:5173` en tu navegador. El servidor cuenta con *Hot Module Replacement* (HMR), por lo que cualquier edición en los archivos `.vue` se reflejará instantáneamente.
+
+## Despliegue
+
+### Entorno de Desarrollo
+Para programar y realizar cambios en tiempo real:
+
+```bash
+docker compose up -d ui-dev
+```
+Accede al panel desde tu navegador en: `http://localhost:5173`
+
+### Entorno de Producción
+Para compilar la aplicación final y servirla de forma nativa con Nginx:
+
+```bash
+docker compose up -d --build ui-prod
+```
+Accede al panel de producción directamente en: `http://localhost`
+
+## Limpieza del Sistema
+
+Si necesitas purgar cachés de Vite, módulos de Node locales y limpiar las redes de Docker, ejecuta el script de mantenimiento incluido (requiere permisos de root):
+
+```bash
+sudo ./limpieza.sh
+```
 
 ## Licencia
 
-Distribuido bajo la licencia MIT.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.

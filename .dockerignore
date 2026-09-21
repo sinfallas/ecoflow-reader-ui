@@ -1,0 +1,24 @@
+# Dependencias y compilaciones locales
+node_modules/
+dist/
+dist-ssr/
+
+# Control de versiones y editores
+.git/
+.github/
+.gitignore
+.vscode/
+
+# Cachés temporales
+.vite/
+.vite-temp/
+*.log
+npm-debug.log*
+
+# Documentación y scripts de host (no se necesitan en la imagen)
+README.md
+CONTRIBUTING.md
+TESTING.md
+changelog
+limpieza.sh
+docker-compose.yml
