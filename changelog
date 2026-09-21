@@ -1,4 +1,22 @@
-* commit 163c56a023515599018c7569e3e16b0b7ff738e2 (HEAD -> main, origin/main, origin/HEAD)
+* commit caaa85f1d01b7bc47cf4c7871f06b2462dec57fa (HEAD -> main, origin/main, origin/HEAD)
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Mon Sep 21 18:35:50 2026 -0400
+| 
+|     * bugfix
+| 
+* commit 05db9c5b19bd296140a220e8d2f5de4f4525b306
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Mon Sep 21 18:35:34 2026 -0400
+| 
+|     chore: remover .env rastreado por error
+| 
+* commit 22b675329dca4740c46823e167297b0ea78b8467
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Mon Sep 21 18:29:09 2026 -0400
+| 
+|     * changelog
+| 
+* commit 163c56a023515599018c7569e3e16b0b7ff738e2
 | Author: Jesus Palencia <sinfallas@gmail.com>
 | Date:   Mon Sep 21 18:29:07 2026 -0400
 | 
