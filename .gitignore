@@ -30,3 +30,7 @@ dist-ssr
 # Cachés temporales de Vite
 .vite/
 .vite-temp/
+
+# Playwright
+playwright-report/
+test-results/

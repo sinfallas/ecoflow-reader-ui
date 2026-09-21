@@ -29,8 +29,8 @@ describe('Panel de Telemetría (App.vue)', () => {
       }
     }
     
-    // Le decimos al mock qué devolver cuando se llame a getDevices()
-    vi.mocked(api.getDevices).mockResolvedValue(mockData)
+    // Le decimos al mock qué devolver cuando se llame a getDevices() usando "as any"
+    vi.mocked(api.getDevices).mockResolvedValue(mockData as any)
 
     // 2. Montamos el componente
     const wrapper = mount(App)

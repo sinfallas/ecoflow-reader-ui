@@ -9,7 +9,7 @@ if [[ "$EUID" != "0" ]]; then
 fi
 
 clear
-echo "Limpiando módulos, cachés de Vite y builds del frontend..."
+echo "Limpiando módulos, cachés de Vite, reportes E2E y builds del frontend..."
 
 # Eliminamos la carpeta de distribución y dependencias
 rm -rf dist
@@ -18,6 +18,10 @@ rm -rf node_modules
 # Eliminamos los cachés internos que Vite y Tailwind generan
 rm -rf .vite
 rm -rf .vite-temp
+
+# Eliminamos los reportes y cachés de pruebas E2E (Playwright)
+rm -rf playwright-report
+rm -rf test-results
 
 # Ejecutamos la limpieza profunda de Docker
 docker system prune -af

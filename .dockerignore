@@ -22,3 +22,9 @@ TESTING.md
 changelog
 limpieza.sh
 docker-compose.yml
+
+# Playwright y Pruebas E2E
+playwright-report/
+test-results/
+e2e/
+playwright.config.ts

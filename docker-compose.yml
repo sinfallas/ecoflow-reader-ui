@@ -20,3 +20,15 @@ services:
     ports:
       - "80:80"
     restart: unless-stopped
+
+  # Entorno para Pruebas E2E (Playwright)
+  ui-e2e:
+    image: mcr.microsoft.com/playwright:v1.63.0-jammy
+    working_dir: /app
+    ipc: host
+    volumes:
+      - .:/app
+    profiles:
+      - e2e
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
