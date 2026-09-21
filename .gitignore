@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Archivos de entorno local
+.env
+.env.*
+!.env.example
+
+# Cachés temporales de Vite
+.vite/
+.vite-temp/
