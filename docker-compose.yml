@@ -1,14 +1,22 @@
 services:
-  ui:
+  # Entorno de desarrollo interactivo (Vite)
+  ui-dev:
     image: node:22-alpine
-    container_name: ecoflow_ui
-    hostname: ecoflow_ui
-    pull_policy: always
-    environment:
-      TZ: 'America/Caracas'
+    container_name: ecoflow_ui_dev
+    working_dir: /app
     volumes:
       - .:/app
-    working_dir: /app
+      - /app/node_modules
     ports:
       - "5173:5173"
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+  # Entorno de producción (Nginx multi-stage)
+  ui-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecoflow_ui_prod
+    ports:
+      - "80:80"
+    restart: unless-stopped
